@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import { Circle as CircleStyle, Fill, Stroke, Style, Text } from 'ol/style';
+import { Fill, Stroke, Style, Text } from 'ol/style';
 
 
 export const DefaultStyle = new Style({

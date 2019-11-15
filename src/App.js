@@ -1,28 +1,19 @@
 import React from 'react';
-import logo from './logo.svg';
-import MapElem from "./components/mapElem";
+import Map from "./components/map";
+import Sidebar from './components/sidebar';
 import './App.css';
 
 function App() {
   return (
-    <MapElem />
 
-    // <div className="App">
-    //   <header className="App-header">
-    //     <img src={logo} className="App-logo" alt="logo" />
-    //     <p>
-    //       Edit <code>src/App.js</code> and save to reload.
-    //     </p>
-    //     <a
-    //       className="App-link"
-    //       href="https://reactjs.org"
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       Learn React
-    //     </a>
-    //   </header>
-    // </div>
+
+    <div class="page-wrapper chiller-theme toggled">
+
+      <Sidebar />
+      <main class="page-content">
+        <Map />
+      </main>
+    </div>
   );
 }
 
