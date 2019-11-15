@@ -1,45 +1,39 @@
 import React, { Component } from "react";
-import { render } from "react-dom";
 import Map from 'ol/Map';
 import View from 'ol/View';
-import XYZ from 'ol/source/XYZ';
-import { DefaultStyle, VisaFreeStyle } from './dataStyles';
-import { VisaFreeCountries } from './visafreeCountries'
+import { DefaultStyle, VisaFreeStyle } from './data/dataStyles';
+import { VisaFreeCountries } from './data/visafreeCountries'
 import GeoJSON from 'ol/format/GeoJSON';
-import Circle from 'ol/geom/Circle';
-// import * as Layer from 'ol/layer';
 import { Tile as TileLayer, Vector as VectorLayer } from 'ol/layer';
-import data from './data.geojson';
 import { OSM, Vector as VectorSource } from 'ol/source';
+import './map/map.css';
 
-import Feature from 'ol/Feature';
-
-class MapElem extends Component {
+class MapPage extends Component {
 
     constructor(props) {
         super(props);
+
+
     }
 
     PreapareMap() {
         this.Map = new Map({
             layers: [
                 new TileLayer({
-                    source: new XYZ({
-                        url: 'https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-                    })
-                })
+                    source: new OSM()
+                }),
             ],
             projection: 'EPSG:4326',
             view: new View({
                 center: [0, 0],
-                zoom: 2
+                zoom: 6
             })
         });
     }
 
     PrepareData() {
 
-        var data = require('./data.geojson'); // forward slashes will depend on the file location
+        var data = require('./data/data.geojson'); // forward slashes will depend on the file location
 
         var vectorSource = new VectorSource({
             format: new GeoJSON(),
@@ -70,9 +64,11 @@ class MapElem extends Component {
 
     render() {
         return (
-            <div style={{ width: '100%', height: 800 }} id='mapdiv'></div>
+            <div class="container-fluid">
+                <div style={{ width: '100%', height: 800 }} id='mapdiv'></div>
+            </div>
         );
     }
 }
 
-export default MapElem;
+export default MapPage;
