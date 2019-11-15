@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/VisaFreeCountries/precache-manifest.4fce0a98bbaf601e48dc154af7f7fae1.js"
+  "/VisaFreeCountries/precache-manifest.8312d7d2262b8d02608c3da665c0bc24.js"
 );
 
 self.addEventListener('message', (event) => {
