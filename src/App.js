@@ -1,20 +1,35 @@
-import React from 'react';
+import React, { Component } from "react";
 import Map from "./components/map";
 import Sidebar from './components/sidebar';
 import './App.css';
 
-function App() {
-  return (
+class App extends Component {
+  constructor(props) {
+    super(props);
 
+    this.state = {
+      selectedCountryName: ''
+    }
+  }
 
-    <div class="page-wrapper chiller-theme toggled">
+  changeCountryNameApp(countryName) {
+    console.log('app = ' + countryName);
+    this.setState(
+      { selectedCountryName: countryName }
+    )
+  }
 
-      <Sidebar />
-      <main class="page-content">
-        <Map />
-      </main>
-    </div>
-  );
+  render() {
+    return (
+      <div class="page-wrapper chiller-theme toggled">
+
+        <Sidebar callbackFromApp={this.changeCountryNameApp.bind(this)} />
+        <main class="page-content">
+          <Map selectedCountryName={this.state.selectedCountryName} />
+        </main>
+      </div>
+    );
+  }
 }
 
 export default App;

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { VisaFreeCountries } from './data/visafreeCountries'
-import { SearchResult } from './sidebar/searchResult';
+import SearchResult from './sidebar/searchResult';
 import './sidebar/sidebar.css'
 
 class Sidebar extends Component {
@@ -15,17 +15,18 @@ class Sidebar extends Component {
     }
 
     componentDidMount() {
-        // this.getData();
-        // console.log(countryList);
         this.setState({
             current: this.state.list
         })
     }
 
+    changeCountryName(countryName) {
+        this.props.callbackFromApp(countryName);
+    }
+
+
     handleChange(e) {
-        // Variable to hold the original version of the list
         let currentList = [];
-        // Variable to hold the filtered list before putting into state
         let newList = [];
 
         // If the search bar isn't empty
@@ -33,8 +34,6 @@ class Sidebar extends Component {
             // Assign the original list to currentList
             currentList = this.state.list;
 
-            // Use .filter() to determine which items should be displayed
-            // based on the search terms
             newList = currentList.filter(item => {
                 // change current item to lowercase
                 const lc = item.toLowerCase();
@@ -49,7 +48,7 @@ class Sidebar extends Component {
             // If the search bar is empty, set newList to original task list
             newList = this.state.list;
         }
-        // Set the filtered state based on what our rules added to newList
+
         this.setState({
             current: newList
         });
@@ -58,7 +57,7 @@ class Sidebar extends Component {
     render() {
         const countryList = this.state.current.map((number) =>
             // Wrong! The key should have been specified here:
-            <SearchResult value={number} />
+            <SearchResult callbackFromParent={this.changeCountryName.bind(this)} value={number} />
         );
 
         return (
@@ -83,7 +82,8 @@ class Sidebar extends Component {
                     <div class="sidebar-search">
                         <div>
                             <div class="input-group">
-                                <input type="text" class="form-control search-menu" onChange={this.handleChange.bind(this)} placeholder="Search..." />
+                                <input type="text" class="form-control search-menu"
+                                    onChange={this.handleChange.bind(this)} placeholder="Search..." />
                                 <div class="input-group-append">
                                     <span class="input-group-text">
                                         <i class="fa fa-search" aria-hidden="true"></i>
@@ -99,23 +99,6 @@ class Sidebar extends Component {
                         </ul>
                     </div>
                 </div>
-                {/* <div class="sidebar-footer">
-                    <a href="#">
-                        <i class="fa fa-bell"></i>
-                        <span class="badge badge-pill badge-warning notification">3</span>
-                    </a>
-                    <a href="#">
-                        <i class="fa fa-envelope"></i>
-                        <span class="badge badge-pill badge-success notification">7</span>
-                    </a>
-                    <a href="#">
-                        <i class="fa fa-cog"></i>
-                        <span class="badge-sonar"></span>
-                    </a>
-                    <a href="#">
-                        <i class="fa fa-power-off"></i>
-                    </a>
-                </div> */}
             </nav>
         )
     }

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Map from 'ol/Map';
 import View from 'ol/View';
-import { DefaultStyle, VisaFreeStyle } from './data/dataStyles';
+import { DefaultStyle, VisaFreeStyle, SelectedCountryStyle } from './data/dataStyles';
 import { VisaFreeCountries } from './data/visafreeCountries'
 import GeoJSON from 'ol/format/GeoJSON';
 import { Tile as TileLayer, Vector as VectorLayer } from 'ol/layer';
@@ -13,7 +13,9 @@ class MapPage extends Component {
     constructor(props) {
         super(props);
 
-
+        this.state = {
+            selectedCountryName: this.props.selectedCountryName
+        }
     }
 
     PreapareMap() {
@@ -62,7 +64,49 @@ class MapPage extends Component {
         this.PrepareData();
     }
 
+    setStyle(feature) {
+        var countryName = feature.get('NAME');
+        if (VisaFreeCountries.indexOf(countryName) >= 0) {
+            // VisaFreeStyle.getText().setText(feature.get('NAME_SORT'));
+            feature.setStyle(VisaFreeStyle);
+        }
+        else {
+            // DefaultStyle.getText().setText(feature.get('NAME_SORT'));
+            feature.setStyle(DefaultStyle);
+        }
+    }
+
+    flyToFeature() {
+        var countryName = this.props.selectedCountryName;
+        if (countryName !== "") {
+
+            //This gives vector source.
+            var source = this.Map.getLayers(0).array_[1].getSource();
+            var featureList = source.getFeatures();
+            var geom;
+
+            for (let i = 0; i < featureList.length; i++) {
+                var feat = featureList[i];
+                var featName = feat.get("NAME_SORT");
+                if (featName == countryName) {
+                    feat.setStyle(SelectedCountryStyle);
+                    geom = feat.getGeometry();
+                }
+                else {
+                    this.setStyle(feat);
+                }
+            }
+
+            this.Map.getView().fit(geom, {
+                duration: 1500
+            });
+        }
+    }
+
     render() {
+        const countryName = this.state.selectedCountryName;
+        console.log('map = ' + this.props.selectedCountryName);
+        this.flyToFeature();
         return (
             <div class="container-fluid">
                 <div style={{ width: '100%', height: 800 }} id='mapdiv'></div>
