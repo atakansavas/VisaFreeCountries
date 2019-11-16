@@ -40,3 +40,25 @@ export const VisaFreeStyle = new Style({
         })
     })
 });
+
+
+export const SelectedCountryStyle = new Style({
+    fill: new Fill({
+        color: 'red'
+    }),
+    stroke: new Stroke({
+        color: 'white',
+        width: 1
+    }),
+    text: new Text({
+        font: '12px Calibri,sans-serif',
+        fill: new Fill({
+            color: '#000'
+        }),
+        stroke: new Stroke({
+            color: '#fff',
+            width: 3
+        })
+    })
+});
+

@@ -9,14 +9,12 @@ class SearchResult extends Component {
 
 
     componentDidMount() {
-        this.state = {
-            map: this.props.map,
-        }
+
     }
 
     handleClick(e) {
         e.preventDefault();
-        console.log(this.props.value);
+        this.props.callbackFromParent(this.props.value);
     }
 
 

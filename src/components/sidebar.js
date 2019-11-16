@@ -20,6 +20,11 @@ class Sidebar extends Component {
         })
     }
 
+    changeCountryName(countryName) {
+        this.props.callbackFromApp(countryName);
+    }
+
+
     handleChange(e) {
         let currentList = [];
         let newList = [];
@@ -52,7 +57,7 @@ class Sidebar extends Component {
     render() {
         const countryList = this.state.current.map((number) =>
             // Wrong! The key should have been specified here:
-            <SearchResult value={number} />
+            <SearchResult callbackFromParent={this.changeCountryName.bind(this)} value={number} />
         );
 
         return (
