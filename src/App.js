@@ -8,7 +8,8 @@ class App extends Component {
     super(props);
 
     this.state = {
-      selectedCountryName: ''
+      selectedCountryName: '',
+      isSidebarOpen: true
     }
   }
 
@@ -19,11 +20,26 @@ class App extends Component {
     )
   }
 
-  render() {
-    return (
-      <div class="page-wrapper chiller-theme toggled">
 
-        <Sidebar callbackFromApp={this.changeCountryNameApp.bind(this)} />
+  toggleSidebar(isOpen) {
+    if (isOpen) {
+      this.setState({ isSidebarOpen: false });
+    }
+    else {
+      this.setState({ isSidebarOpen: true });
+    }
+  }
+
+  render() {
+    var wrapperStyle = "page-wrapper chiller-theme";
+    if (this.state.isSidebarOpen) {
+      wrapperStyle += " toggled";
+    }
+
+    return (
+      <div class={wrapperStyle}>
+
+        <Sidebar changeSidebarStatus={this.toggleSidebar.bind(this)} callbackFromApp={this.changeCountryNameApp.bind(this)} />
         <main class="page-content">
           <Map selectedCountryName={this.state.selectedCountryName} />
         </main>

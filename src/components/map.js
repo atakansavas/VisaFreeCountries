@@ -34,7 +34,6 @@ class MapPage extends Component {
     }
 
     PrepareData() {
-
         var data = require('./data/data.geojson'); // forward slashes will depend on the file location
 
         var vectorSource = new VectorSource({
@@ -46,11 +45,11 @@ class MapPage extends Component {
         vectorLayer.setStyle(function (feature) {
             var countyName = feature.get('NAME');
             if (VisaFreeCountries.indexOf(countyName) >= 0) {
-                VisaFreeStyle.getText().setText(feature.get('NAME_SORT'));
+                VisaFreeStyle.getText().setText(feature.get('NAME'));
                 return VisaFreeStyle;
 
             }
-            DefaultStyle.getText().setText(feature.get('NAME_SORT'));
+            DefaultStyle.getText().setText(feature.get('NAME'));
             return DefaultStyle;
         });
         vectorLayer.setSource(vectorSource);
@@ -64,14 +63,16 @@ class MapPage extends Component {
         this.PrepareData();
     }
 
-    setStyle(feature) {
+    setFeatureStyle(feature) {
         var countryName = feature.get('NAME');
+        DefaultStyle.getText().setText(feature.get('NAME'));
+        VisaFreeStyle.getText().setText(feature.get('NAME'));
         if (VisaFreeCountries.indexOf(countryName) >= 0) {
-            // VisaFreeStyle.getText().setText(feature.get('NAME_SORT'));
+            // VisaFreeStyle.getText().setText(feature.get('NAME'));
             feature.setStyle(VisaFreeStyle);
         }
         else {
-            // DefaultStyle.getText().setText(feature.get('NAME_SORT'));
+            // DefaultStyle.getText().setText(feature.get('NAME'));
             feature.setStyle(DefaultStyle);
         }
     }
@@ -87,13 +88,24 @@ class MapPage extends Component {
 
             for (let i = 0; i < featureList.length; i++) {
                 var feat = featureList[i];
-                var featName = feat.get("NAME_SORT");
+                var featName = feat.get("NAME");
                 if (featName == countryName) {
+                    SelectedCountryStyle.getText().setText(feat.get('NAME'));
                     feat.setStyle(SelectedCountryStyle);
                     geom = feat.getGeometry();
                 }
                 else {
-                    this.setStyle(feat);
+                    feat.setStyle(function (feature) {
+                        var countyName = feature.get('NAME');
+                        if (VisaFreeCountries.indexOf(countyName) >= 0) {
+                            VisaFreeStyle.getText().setText(feature.get('NAME'));
+                            return VisaFreeStyle;
+
+                        }
+                        DefaultStyle.getText().setText(feature.get('NAME'));
+                        return DefaultStyle;
+                    });
+                    // this.setFeatureStyle(feat);
                 }
             }
 
@@ -104,8 +116,6 @@ class MapPage extends Component {
     }
 
     render() {
-        const countryName = this.state.selectedCountryName;
-        console.log('map = ' + this.props.selectedCountryName);
         this.flyToFeature();
         return (
             <div class="container-fluid">

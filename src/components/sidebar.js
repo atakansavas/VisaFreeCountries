@@ -10,7 +10,8 @@ class Sidebar extends Component {
         this.state = {
             list: VisaFreeCountries,
             filtered: [],
-            current: []
+            current: [],
+            isSidebarOpen: true
         };
     }
 
@@ -22,6 +23,18 @@ class Sidebar extends Component {
 
     changeCountryName(countryName) {
         this.props.callbackFromApp(countryName);
+    }
+
+    toggleSidebar() {
+        var current = this.state.isSidebarOpen;
+        if (current) {
+            this.setState({ isSidebarOpen: false });
+        }
+        else {
+            this.setState({ isSidebarOpen: true });
+        }
+
+        this.props.changeSidebarStatus(this.state.isSidebarOpen);
     }
 
 
@@ -61,45 +74,53 @@ class Sidebar extends Component {
         );
 
         return (
-            <nav id="sidebar" class="sidebar-wrapper">
-                <div class="sidebar-content">
-                    <div class="sidebar-brand">
-                        <a href="#">VizeFree</a>
-                    </div>
-                    <div class="sidebar-header">
-                        <div class="user-info">
-                            <span class="user-name">Atakan
-                                <strong>Savas</strong>
-                            </span>
-                            <span class="user-role">developer</span>
-                            <span class="user-status">
-                                <i class="fa fa-circle"></i>
-                                <span>Online</span>
-                            </span>
+            <React.Fragment>
+                <a id="show-sidebar" onClick={this.toggleSidebar.bind(this)} class="btn btn-sm btn-dark" href="#">
+                    <i class="fas fa-bars"></i>
+                </a>
+                <nav id="sidebar" class="sidebar-wrapper">
+                    <div class="sidebar-content">
+                        <div class="sidebar-brand">
+                            <a href="#">VizeFree</a>
+                            <div onClick={this.toggleSidebar.bind(this)} id="close-sidebar">
+                                <i class="fas fa-times"></i>
+                            </div>
                         </div>
-                    </div>
+                        <div class="sidebar-header">
+                            <div class="user-info">
+                                <span class="user-name">Atakan
+                                <strong>Savas</strong>
+                                </span>
+                                <span class="user-role">developer</span>
+                                <span class="user-status">
+                                    <i class="fa fa-circle"></i>
+                                    <span>Online</span>
+                                </span>
+                            </div>
+                        </div>
 
-                    <div class="sidebar-search">
-                        <div>
-                            <div class="input-group">
-                                <input type="text" class="form-control search-menu"
-                                    onChange={this.handleChange.bind(this)} placeholder="Search..." />
-                                <div class="input-group-append">
-                                    <span class="input-group-text">
-                                        <i class="fa fa-search" aria-hidden="true"></i>
-                                    </span>
+                        <div class="sidebar-search">
+                            <div>
+                                <div class="input-group">
+                                    <input type="text" class="form-control search-menu"
+                                        onChange={this.handleChange.bind(this)} placeholder="Search..." />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-search" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="sidebar-menu">
-                        <ul>
-                            {countryList}
-                        </ul>
+                        <div class="sidebar-menu">
+                            <ul>
+                                {countryList}
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </nav>
+                </nav>
+            </React.Fragment>
         )
     }
 }
