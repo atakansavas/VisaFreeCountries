@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/VisaFreeCountries/static/css/main.57074765.chunk.css",
-    "main.js": "/VisaFreeCountries/static/js/main.a752db22.chunk.js",
-    "main.js.map": "/VisaFreeCountries/static/js/main.a752db22.chunk.js.map",
+    "main.js": "/VisaFreeCountries/static/js/main.27058620.chunk.js",
+    "main.js.map": "/VisaFreeCountries/static/js/main.27058620.chunk.js.map",
     "runtime-main.js": "/VisaFreeCountries/static/js/runtime-main.5f7e4bbe.js",
     "runtime-main.js.map": "/VisaFreeCountries/static/js/runtime-main.5f7e4bbe.js.map",
-    "static/js/2.98bbc2b2.chunk.js": "/VisaFreeCountries/static/js/2.98bbc2b2.chunk.js",
-    "static/js/2.98bbc2b2.chunk.js.map": "/VisaFreeCountries/static/js/2.98bbc2b2.chunk.js.map",
+    "static/js/2.0057b48a.chunk.js": "/VisaFreeCountries/static/js/2.0057b48a.chunk.js",
+    "static/js/2.0057b48a.chunk.js.map": "/VisaFreeCountries/static/js/2.0057b48a.chunk.js.map",
     "index.html": "/VisaFreeCountries/index.html",
-    "precache-manifest.44a3bfbde8e330734b1a161ddd010ef9.js": "/VisaFreeCountries/precache-manifest.44a3bfbde8e330734b1a161ddd010ef9.js",
+    "precache-manifest.4a5febf3aad9b8b7c049a526bd9c7dfc.js": "/VisaFreeCountries/precache-manifest.4a5febf3aad9b8b7c049a526bd9c7dfc.js",
     "service-worker.js": "/VisaFreeCountries/service-worker.js",
     "static/css/main.57074765.chunk.css.map": "/VisaFreeCountries/static/css/main.57074765.chunk.css.map",
     "static/media/data.geojson": "/VisaFreeCountries/static/media/data.09311e26.geojson"
   },
   "entrypoints": [
     "static/js/runtime-main.5f7e4bbe.js",
-    "static/js/2.98bbc2b2.chunk.js",
+    "static/js/2.0057b48a.chunk.js",
     "static/css/main.57074765.chunk.css",
-    "static/js/main.a752db22.chunk.js"
+    "static/js/main.27058620.chunk.js"
   ]
 }
